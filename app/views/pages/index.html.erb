@@ -1,0 +1,10 @@
+<% @albums.each_slice(4) do |album_chunk| %>
+  <div class="row-fluid">
+    <% album_chunk.each do |album| %>
+      <% image = album['image'].detect{|i| i['size'] == 'mega'} %>
+      <div style='background-image:url(<%= image['#text'] %>)' class='span4 albumart'>
+        <%# content_tag :h3, "#{album['artist']} - #{album['name']}" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

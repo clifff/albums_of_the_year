@@ -1,0 +1,11 @@
+$gridColumns: 16;
+$gridGutterWidth: 0px;
+$gridGutterWidth1200: 0px;
+$gridGutterWidth768: 0px;
+@import "twitter/bootstrap";
+@import "twitter/bootstrap-responsive";
+
+div.albumart {
+  background-size: 100%;
+  height: $gridColumnWidth1200 * 4;
+}
