@@ -14,17 +14,29 @@ set :use_sudo, false
 
 set :deploy_via, :remote_cache
 
+set :rails_env, :production
+set :unicorn_binary, "bundle exec unicorn"
+set :unicorn_config, "#{current_path}/config/unicorn.rb"
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+namespace :deploy do
+  task :start, :roles => :web, :except => { :no_release => true } do 
+    run "cd #{current_path} && #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
+  end
+  task :stop, :roles => :web, :except => { :no_release => true } do 
+    run " kill `cat #{unicorn_pid}`"
+  end
+  task :graceful_stop, :roles => :web, :except => { :no_release => true } do
+    run "kill -s QUIT `cat #{unicorn_pid}`"
+  end
+  task :reload, :roles => :web, :except => { :no_release => true } do
+    run "kill -s USR2 `cat #{unicorn_pid}`"
+  end
+  task :restart, :roles => :web, :except => { :no_release => true } do
+    stop
+    start
+  end
+end
