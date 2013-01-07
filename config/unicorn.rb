@@ -1,9 +1,10 @@
 # unicorn_rails -c /data/github/current/config/unicorn.rb -E production -D
  
 rails_env = ENV['RAILS_ENV']
+rails_root = File.join(File.dirname(__FILE__), '../')
  
 # 16 workers and 1 master
-worker_processes (rails_env == 'production' ? 16 : 4)
+worker_processes (rails_env == 'production' ? 8 : 4)
 
 # Load rails+github.git into the master before forking workers
 # for super-fast worker spawn times
@@ -14,7 +15,7 @@ timeout 30
  
 # Listen on a Unix data socket
 if rails_env == 'production'
-  listen '/tmp/albums.socket', :backlog => 2048
+  listen File.join(rails_root, 'tmp/albums.socket'), :backlog => 2048
 else
   listen 3000
 end
