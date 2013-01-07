@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require_tree .
 //
+//
+function submitUsername(){
+  var username = jQuery('#username_field').val();
+  window.location.href = "/lastfm/" + username;
+}
