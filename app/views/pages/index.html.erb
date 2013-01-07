@@ -1,0 +1,15 @@
+<div class="row-fluid">
+  <form class='form-inline' onSubmit='submitUsername(); return false' >
+    <fieldset>
+      <legend>
+        Want to find out what new albums you listened to the most in 2012? Just type in your <%= link_to "Last.fm", "http://www.last.fm/" %>
+        username and we'll figure it out for you.
+      </legend>
+      <input type="text" placeholder="last.fm username" name='username' required id='username_field'>
+      <button type="submit" class="btn" >Submit</button>
+    </fieldset>
+  </form>
+</div>
+<div class="row-fluid">
+  <span class="help-block"><%= link_to "Curious or impatient? Check out my list.", lastfm_bestof_url(:username => 'clifff') %></span>
+</div>
