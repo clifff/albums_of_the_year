@@ -19,7 +19,10 @@ gem 'debugger'
 gem 'redis'
 gem 'foreman'
 gem 'nokogiri'
-gem 'capistrano'
+
+group :development do
+  gem 'capistrano'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -28,7 +31,7 @@ gem 'capistrano'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'

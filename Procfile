@@ -1,2 +1,2 @@
 redis: redis-server
-rails: rails s
+rails: unicorn_rails -p 3000
