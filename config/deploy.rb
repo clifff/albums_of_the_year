@@ -15,7 +15,7 @@ set :use_sudo, false
 set :deploy_via, :remote_cache
 
 set :rails_env, :production
-set :unicorn_binary, "bundle exec unicorn"
+set :unicorn_binary, "bundle exec unicorn_rails"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
