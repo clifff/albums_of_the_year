@@ -64,22 +64,5 @@ after_fork do |server, worker|
   # Unicorn master is started as root, which is fine, but let's
   # drop the workers to git:git
  
-  begin
-    uid, gid = Process.euid, Process.egid
-    user, group = 'git', 'git'
-    target_uid = Etc.getpwnam(user).uid
-    target_gid = Etc.getgrnam(group).gid
-    worker.tmp.chown(target_uid, target_gid)
-    if uid != target_uid || gid != target_gid
-      Process.initgroups(user, target_gid)
-      Process::GID.change_privilege(target_gid)
-      Process::UID.change_privilege(target_uid)
-    end
-  rescue => e
-    if rails_env == 'development'
-      STDERR.puts "couldn't change user, oh well"
-    else
-      raise e
-    end
-  end
+  # we start the unicorn works as 'albums' user so no need to switch
 end
