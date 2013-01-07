@@ -16,7 +16,7 @@ timeout 30
  
 # Listen on a Unix data socket
 if rails_env == 'production'
-  listen '/data/github/current/tmp/sockets/unicorn.sock', :backlog => 2048
+  listen '/tmp/albums.socket', :backlog => 2048
 else
   listen 3000
 end
