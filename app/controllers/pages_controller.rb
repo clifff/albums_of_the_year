@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   def index
     @albums = []
 
+=begin
     (1..5).each do |page|
       top_albums = LastFmApi.get(:method => 'user.gettopalbums', :user => 'clifff', :page => page, :period => '12month')
       top_albums['topalbums']['album'].each do |album|
@@ -11,6 +12,7 @@ class PagesController < ApplicationController
         @albums << album
       end
     end
+=end
     @albums.pop( @albums.length % 4 )
   end
 end
