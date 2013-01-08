@@ -4,9 +4,16 @@
   <title><%= page_title %></title>
   <% if @username %>
     <meta name="description" content="<%= @username %>'s most listened to albums from 2012" />
+    <% if @albums.present? %>
+      <% image = @albums[0]['image'].detect{|i| i['size'] == 'large' } %>
+      <% if image %>
+        <meta property="og:image" content="<%= image['#text'] %>"/>
+      <% end %>
+    <% end %>
   <% else %>
-  <meta name="description" content="Use your Last.fm account to find out what new music you listened to the most in 2012" />
+    <meta name="description" content="Use your Last.fm account to find out what new music you listened to the most in 2012" />
   <% end %>
+  <meta property="og:site_name" content="Albums of 2012"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
