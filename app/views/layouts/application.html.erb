@@ -26,7 +26,7 @@
         <li><%= nav_link "Home", root_url %></li>
         <li><%= nav_link "About", about_url %></li>
         <% if params[:action] == "lastfm_bestof" %>
-          <li><%= link_to "Share on Twitter", "http://twitter.com/share?url=#{url_for(:only_path => false)}", :target => "_blank" %></li>
+          <li><%= link_to "Share on Twitter", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%202012&url=#{url_for(:only_path => false)}", :target => "_blank" %></li>
         <% end %>
       </ul>
     </div>
