@@ -25,15 +25,21 @@ after "deploy:restart", "deploy:cleanup"
 namespace :deploy do
   task :start, :roles => :web, :except => { :no_release => true } do 
     run "cd #{current_path} && #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
+    run "cd #{current_path} && bundle exec foreman export upstart /etc/init -a #{application} -u #{user} -f ./Procfile.production"
+    run "cd #{current_path} && #{try_sudo} start #{application}"
   end
   task :stop, :roles => :web, :except => { :no_release => true } do 
     run " kill `cat #{unicorn_pid}`"
+    run "cd #{current_path} && #{try_sudo} stop #{application}"
   end
   task :graceful_stop, :roles => :web, :except => { :no_release => true } do
     run "kill -s QUIT `cat #{unicorn_pid}`"
+    run "cd #{current_path} && #{try_sudo} stop #{application}"
   end
   task :reload, :roles => :web, :except => { :no_release => true } do
     run "kill -s USR2 `cat #{unicorn_pid}`"
+    run "cd #{current_path} && #{try_sudo} stop #{application}"
+    run "cd #{current_path} && #{try_sudo} start #{application}"
   end
   task :restart, :roles => :web, :except => { :no_release => true } do
     stop
