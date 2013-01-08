@@ -3,6 +3,8 @@
     <% album_chunk.each do |album| %>
       <% image = album['image'].detect{|i| i['size'] == 'extralarge'} %>
       <div style='background-image:url(<%= image['#text'] %>)' class='span4 albumart'>
+        <%# do this so facebook picks up on the album art %>
+        <%= image_tag image, :class => "hidden" %>
         <div class='inside'>
           <%= content_tag :h3, "#{album['artist']} - #{album['name']}" %>
         </div>
