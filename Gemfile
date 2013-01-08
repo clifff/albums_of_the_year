@@ -19,6 +19,7 @@ gem 'debugger'
 gem 'redis'
 gem 'foreman'
 gem 'nokogiri'
+gem 'resque'
 
 group :development do
   gem 'capistrano'

@@ -26,7 +26,20 @@ function setAlbumArtHeight(){
   });
 }
 
+function pollIfReady(url){
+  window.setInterval(function(){
+    jQuery.getJSON(url, function(pageReady){
+      if (pageReady){
+        window.location.reload();
+      }
+    });
+  }, 5000);
+}
+
 $(document).ready(function(){
+  if (!!window.polling_url){
+    pollIfReady(window.polling_url);
+  }
   setAlbumArtHeight();
   $(window).resize(setAlbumArtHeight);
 });
