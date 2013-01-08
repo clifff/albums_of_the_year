@@ -11,7 +11,12 @@ class PagesController < ApplicationController
     @username = params[:username]
     if $redis.sismember( LastFmUser.redis_set_key, @username )
       @albums = LastFmUser.top_albums_for_username(@username)
-      @albums.pop( @albums.length % 4 )
+      if @albums.empty?
+        render :action => :missing, :status => 404
+      else
+        @albums.pop( @albums.length % 4 )
+        render
+      end
     else
       Resque.enqueue(GetLastFmDataResqueJob, @username)
       render :action => :waiting

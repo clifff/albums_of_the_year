@@ -1,12 +1,22 @@
-<% @albums.each_slice(4) do |album_chunk| %>
-  <div class="row-fluid">
-    <% album_chunk.each do |album| %>
-      <% image = album['image'].detect{|i| i['size'] == 'extralarge'} %>
-      <div style='background-image:url(<%= image['#text'] %>)' class='span4 albumart'>
-        <div class='inside'>
-          <%= content_tag :h3, "#{album['artist']} - #{album['name']}" %>
+<% if @albums.empty? %>
+  <span class='span2'></span>
+  <span class='span12'>
+    <h3>404 - Sorry, no Last.fm records found for <%= @username %></h3>
+    <p></p>
+    <p><small>This page will automatically update when your albums are ready.</small></p>
+  </span>
+  <span class='span2'></span>
+<% else %>
+  <% @albums.each_slice(4) do |album_chunk| %>
+    <div class="row-fluid">
+      <% album_chunk.each do |album| %>
+        <% image = album['image'].detect{|i| i['size'] == 'extralarge'} %>
+        <div style='background-image:url(<%= image['#text'] %>)' class='span4 albumart'>
+          <div class='inside'>
+            <%= content_tag :h3, "#{album['artist']} - #{album['name']}" %>
+          </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
