@@ -10,7 +10,10 @@ set :scm, :git
 role :web, "linode"
 set :user, "albums"
 set :deploy_to, "/home/albums"
-set :use_sudo, false
+
+# TODO: not this
+set :use_sudo, true
+default_run_options[:pty] = true
 
 set :deploy_via, :remote_cache
 
@@ -25,7 +28,7 @@ after "deploy:restart", "deploy:cleanup"
 namespace :deploy do
   task :start, :roles => :web, :except => { :no_release => true } do 
     run "cd #{current_path} && #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
-    run "cd #{current_path} && bundle exec foreman export upstart /etc/init -a #{application} -u #{user} -f ./Procfile.production"
+    run "cd #{current_path} && #{try_sudo} bundle exec foreman export upstart /etc/init -a #{application} -u #{user} -f ./Procfile.production"
     run "cd #{current_path} && #{try_sudo} start #{application}"
   end
   task :stop, :roles => :web, :except => { :no_release => true } do 

@@ -1,3 +1,5 @@
+require 'resque/server'
+
 AlbumsOfTheYear::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -12,6 +14,8 @@ AlbumsOfTheYear::Application.routes.draw do
   match '/lastfm/:username' => "pages#lastfm_bestof", :as => :lastfm_bestof
   match '/about' => "pages#about", :as => :about
   match '/lastfm/:username/waiting' => "pages#lastfm_waiting", :as => :lastfm_waiting
+
+  mount Resque::Server.new, :at => "/resque"
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
