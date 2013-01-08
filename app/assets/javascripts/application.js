@@ -19,3 +19,14 @@ function submitUsername(){
   var username = jQuery('#username_field').val();
   window.location.href = "/lastfm/" + username;
 }
+
+function setAlbumArtHeight(){
+  $('.albumart').each(function(){
+    $(this).css('height',$(this).width()+'px');
+  });
+}
+
+$(document).ready(function(){
+  setAlbumArtHeight();
+  $(window).resize(setAlbumArtHeight);
+});
