@@ -1,0 +1,14 @@
+<%= javascript_tag do %>
+  window.polling_url = '<%= lastfm_waiting_url(:username => @username) %>';
+<% end %>
+
+<div class="row-fluid">
+  <span class='span2'></span>
+  <span class='span12'>
+    <h3>Sit tight <%= @username %>, this is gonna take a minute.</h3>
+    <%= image_tag "loading.jpg" %>
+    <p></p>
+    <p><small>This page will automatically update when your albums are ready.</small></p>
+  </span>
+  <span class='span2'></span>
+</div>
