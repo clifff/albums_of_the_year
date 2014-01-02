@@ -13,6 +13,21 @@ class LastFmApi
     JSON.parse(json)
   end
 
+  def self.get_top_albums(opts = {})
+    opts = last_fm_default_opts(opts)
+    opts[:method] = 'user.gettopalbums'
+    url_params = hash_to_url_params(opts)
+    top_albums = cache(url_params) do
+      conn = new_last_fm_connection
+      response = conn.get "/2.0/?#{url_params}"
+      json = JSON.parse(response.body)
+      albums = json['topalbums']['album'].map{|album| album['mbid']}.compact
+      albums = albums.reject{|x| x == ""}
+      JSON.dump(albums)
+    end
+    JSON.parse(top_albums)
+  end
+
   def self.get_album(opts = {})
     opts = last_fm_default_opts(opts)
     opts[:method] = 'album.getinfo'
@@ -41,7 +56,9 @@ class LastFmApi
         Rails.logger.error "No album at #{url_params.inspect}"
         json = {}
       end
-
+      ['wiki', 'listeners', 'tracks', 'toptags'].each do |field|
+        json.delete(field)
+      end
       JSON.dump(json)
     end
     JSON.parse(json)
@@ -61,6 +78,7 @@ class LastFmApi
     result = $redis.get(key)
     if result.nil?
       result = yield
+      Rails.logger.info result.inspect
       $redis.set(key, result)
     end
     Rails.logger.info result.inspect
