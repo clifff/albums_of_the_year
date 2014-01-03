@@ -53,17 +53,27 @@ class LastFmApi
         if json
           #lol processing
           release_date = json['releasedate']
-          if release_date.present?
+          if release_date.present? && false
             json['releasedate'] = Time.parse(release_date).year
           else
             Rails.logger.info "OMG GETTING INFO ON #{json['mbid']}"
-            doc = Nokogiri::XML( open( "http://musicbrainz.org/ws/2/release/#{json['mbid']}") )
+            resp = Faraday.get "http://musicbrainz.org/ws/2/release/#{json['mbid']}"
+            doc = Nokogiri::XML(resp.body)
             doc.remove_namespaces!
-            date = doc.search("//date").try(:inner_text)
+            date = doc.search("//date")[0].try(:inner_text)
             if date
-              json['releasedate'] = date.to_i
+              # Maybe the date is just the year
+              if date.length == 4
+                json['releasedate'] = date.to_i
+              elsif date.length == 7
+                # maybe like 2008-11
+                json['releasedate'] = Date.strptime(date, "%Y-%m").year
+              else
+                # Or maybe its like 2012-06-05
+                json['releasedate'] = Date.strptime(date, "%Y-%m-%d").year
+              end
             end
-            Rails.logger.info "found date of #{date}"
+            Rails.logger.info "found date of #{json['releasedate']}"
           end
         else
           Rails.logger.error "No album at #{url_params.inspect}"
