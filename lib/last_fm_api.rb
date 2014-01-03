@@ -21,9 +21,19 @@ class LastFmApi
       conn = new_last_fm_connection
       response = conn.get "/2.0/?#{url_params}"
       json = JSON.parse(response.body)
-      albums = json['topalbums']['album'].map{|album| album['mbid']}.compact
-      albums = albums.reject{|x| x == ""}
-      JSON.dump(albums)
+
+      if json['error'] == 6
+        JSON.dump([])
+      else
+        # If only zero or one album is returned, its not an array.
+        # We really want an array, so...
+        json['topalbums']['album'] = [json['topalbums']['album']].flatten.compact
+
+        albums = json['topalbums']['album'].
+          select{ |album| album && album['mbid'].present? }.
+          map{ |album| album['mbid']}
+        JSON.dump(albums)
+      end
     end
     JSON.parse(top_albums)
   end
@@ -36,30 +46,34 @@ class LastFmApi
       conn = new_last_fm_connection
       response = conn.get "/2.0/?#{url_params}"
       body = response.body
-      json = JSON.parse(body)['album']
-      if json
-        #lol processing
-        release_date = json['releasedate']
-        if release_date.present?
-          json['releasedate'] = Time.parse(release_date).year
-        else
-          Rails.logger.info "OMG GETTING INFO ON #{json['mbid']}"
-          doc = Nokogiri::XML( open( "http://musicbrainz.org/ws/2/release/#{json['mbid']}") )
-          doc.remove_namespaces!
-          date = doc.search("//date").try(:inner_text)
-          if date
-            json['releasedate'] = date.to_i
-          end
-          Rails.logger.info "found date of #{date}"
-        end
+      if body.strip.empty? || body.strip == '""'
+        JSON.dump({})
       else
-        Rails.logger.error "No album at #{url_params.inspect}"
-        json = {}
+        json = JSON.parse(body)['album']
+        if json
+          #lol processing
+          release_date = json['releasedate']
+          if release_date.present?
+            json['releasedate'] = Time.parse(release_date).year
+          else
+            Rails.logger.info "OMG GETTING INFO ON #{json['mbid']}"
+            doc = Nokogiri::XML( open( "http://musicbrainz.org/ws/2/release/#{json['mbid']}") )
+            doc.remove_namespaces!
+            date = doc.search("//date").try(:inner_text)
+            if date
+              json['releasedate'] = date.to_i
+            end
+            Rails.logger.info "found date of #{date}"
+          end
+        else
+          Rails.logger.error "No album at #{url_params.inspect}"
+          json = {}
+        end
+        ['wiki', 'listeners', 'tracks', 'toptags'].each do |field|
+          json.delete(field)
+        end
+        JSON.dump(json)
       end
-      ['wiki', 'listeners', 'tracks', 'toptags'].each do |field|
-        json.delete(field)
-      end
-      JSON.dump(json)
     end
     JSON.parse(json)
   end
@@ -78,7 +92,6 @@ class LastFmApi
     result = $redis.get(key)
     if result.nil?
       result = yield
-      Rails.logger.info result.inspect
       $redis.set(key, result)
     end
     Rails.logger.info result.inspect
