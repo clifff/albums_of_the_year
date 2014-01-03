@@ -1,6 +1,6 @@
 module ApplicationHelper
   def page_title
-    title = "Albums of 2012"
+    title = "Albums of 2013"
     if @username
       "#{@username}'s #{title}"
     else
