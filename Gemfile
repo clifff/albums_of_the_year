@@ -22,7 +22,7 @@ gem 'nokogiri'
 gem 'resque'
 
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', "~> 2.15.5"
 end
 
 # To use ActiveModel has_secure_password
