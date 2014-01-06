@@ -1,16 +1,5 @@
 <% @albums.each_slice(4) do |album_chunk| %>
   <div class="row-fluid">
-    <% album_chunk.each do |album| %>
-      <% image = album['image'].detect{|i| i['size'] == 'extralarge'} %>
-      <div style='background-image:url(<%= image['#text'] %>)' class='span4 albumart'>
-        <%# do this so facebook picks up on the album art %>
-        <img src='<%= image['#text'] %>' class='hidden' alt=''/>
-        <div class='inside'>
-          <% name = "#{album['artist']} - #{album['name']}" %>
-          <%= content_tag :h3,  name %>
-          <h4>Listen on: <%= raw [rdio_link(name), spotify_link(name), youtube_link(name)].join(", ") %></h4>
-        </div>
-      </div>
-    <% end %>
+    <%= render :partial => 'album', :collection => album_chunk %>
   </div>
 <% end %>

@@ -33,4 +33,12 @@ module ApplicationHelper
       :target => "_blank",
       :onClick => "trackOutboundLink(this, 'Outbound Links', 'YouTube');"
   end
+
+  def meta_description
+    if @username
+      "#{@username}'s most listened to albums from 2013"
+    else
+      "Use your Last.fm account to find out what new music you listened to the most in 2013"
+    end
+  end
 end

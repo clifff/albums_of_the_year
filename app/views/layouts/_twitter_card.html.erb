@@ -1,0 +1,13 @@
+<meta name="twitter:card" content="gallery"
+<meta name="twitter:site" content="Albums of 2013">
+<% if @username %>
+  <meta name="twitter:creator" content="<%= @username %>">
+<% end %>
+<meta name="twitter:title" content="<%= page_title %>">
+<meta name="twitter:description" content="<%= meta_description %>">
+<% if @albums && @albums.size >= 4 %>
+  <% @albums.first(4).each_with_index do |album, i| %>
+    <% image = album['image'].detect{|i| i['size'] == 'extralarge'} %>
+    <meta name="twitter:image<%= i %>" content="<%= image['#text'] %>">
+  <% end %>
+<% end %>
