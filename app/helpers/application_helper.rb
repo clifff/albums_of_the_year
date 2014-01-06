@@ -17,14 +17,20 @@ module ApplicationHelper
   end
 
   def rdio_link(name)
-    link_to "Rdio", "http://www.rdio.com/search/#{URI::escape(name)}/", :target => "_blank" 
+    link_to "Rdio", "http://www.rdio.com/search/#{URI::escape(name)}/",
+      :target => "_blank",
+      :onClick => "trackOutboundLink(this, 'Outbound Links', 'Rdio');"
   end
 
   def spotify_link(name)
-    link_to "Spotify", "https://play.spotify.com/search/#{URI::escape(name)}/", :target => "_blank" 
+    link_to "Spotify", "https://play.spotify.com/search/#{URI::escape(name)}/",
+      :target => "_blank",
+      :onClick => "trackOutboundLink(this, 'Outbound Links', 'Spotify');"
   end
 
   def youtube_link(name)
-    link_to "YouTube", "http://www.youtube.com/results?search_query=#{URI::escape(name)}", :target => "_blank"
+    link_to "YouTube", "http://www.youtube.com/results?search_query=#{URI::escape(name)}",
+      :target => "_blank",
+      :onClick => "trackOutboundLink(this, 'Outbound Links', 'YouTube');"
   end
 end

@@ -36,6 +36,12 @@ function pollIfReady(url){
   }, 5000);
 }
 
+function trackOutboundLink(link, category, action) { 
+  try {
+    _gaq.push(['_trackEvent', category , action]);
+  } catch(err){}
+}
+
 $(document).ready(function(){
   if (!!window.polling_url){
     pollIfReady(window.polling_url);
