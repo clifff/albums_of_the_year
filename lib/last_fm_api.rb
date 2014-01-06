@@ -53,7 +53,7 @@ class LastFmApi
         if json
           #lol processing
           release_date = json['releasedate']
-          if release_date.present? && false
+          if release_date.present?
             json['releasedate'] = Time.parse(release_date).year
           else
             Rails.logger.info "OMG GETTING INFO ON #{json['mbid']}"
