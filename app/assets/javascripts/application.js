@@ -38,7 +38,7 @@ function pollIfReady(url){
 
 function trackOutboundLink(link, category, action) { 
   try {
-    _gaq.push(['_trackEvent', category , action]);
+    ga('send', 'event', category, action);
   } catch(err){}
 }
 
