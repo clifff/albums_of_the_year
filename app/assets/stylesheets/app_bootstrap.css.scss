@@ -5,8 +5,18 @@ $gridGutterWidth: 0px;
 $gridGutterWidth1200: 0px;
 $gridGutterWidth768: 0px;
 
+$linkColor: #33BBFF;
+$linkColorHover: #0088cc;
+
 @import "twitter/bootstrap";
 @import "twitter/bootstrap-responsive";
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
 
 .navbar {
   margin-bottom: 0px;
@@ -50,8 +60,12 @@ div.inside {
   width: 100;
   h3 {
     margin: 0 0 0 0;
-    padding: 5px 0 0 5px;
+    padding: 8px 0 0 8px;
     color: #EEE;
+  }
+  h4 {
+    color: #EEE;
+    padding: 8px 0 0 8px;
   }
 
 }

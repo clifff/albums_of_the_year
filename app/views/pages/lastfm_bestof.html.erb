@@ -6,7 +6,9 @@
         <%# do this so facebook picks up on the album art %>
         <img src='<%= image['#text'] %>' class='hidden' alt=''/>
         <div class='inside'>
-          <%= content_tag :h3, "#{album['artist']} - #{album['name']}" %>
+          <% name = "#{album['artist']} - #{album['name']}" %>
+          <%= content_tag :h3,  name %>
+          <h4>Listen on: <%= raw [rdio_link(name), spotify_link(name), youtube_link(name)].join(", ") %></h4>
         </div>
       </div>
     <% end %>

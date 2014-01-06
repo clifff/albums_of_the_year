@@ -15,4 +15,16 @@ module ApplicationHelper
       link_to link_text, link_path
     end
   end
+
+  def rdio_link(name)
+    link_to "Rdio", "http://www.rdio.com/search/#{URI::escape(name)}/", :target => "_blank" 
+  end
+
+  def spotify_link(name)
+    link_to "Spotify", "https://play.spotify.com/search/#{URI::escape(name)}/", :target => "_blank" 
+  end
+
+  def youtube_link(name)
+    link_to "YouTube", "http://www.youtube.com/results?search_query=#{URI::escape(name)}", :target => "_blank"
+  end
 end
