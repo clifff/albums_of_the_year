@@ -1,2 +1,2 @@
 rails: unicorn_rails -E production -c config/unicorn.rb
-resque: bundle exec rake environment resque:work QUEUE=* COUNT=2
+resque: bundle exec rake resque:workers
