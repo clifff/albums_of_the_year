@@ -29,15 +29,18 @@
         <% if params[:action] == "lastfm_bestof" %>
           <li class="divider"></li>
           <li>
-            <%= link_to "Tweet you list!", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%202013:%20#{url_for(:only_path => false)}",
+            <%= link_to "Tweet your list!", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%202013:%20#{url_for(:only_path => false)}",
               :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Tweet');"
             %>
           </li>
+          <% image = @albums[0]['image'].detect{|i| i['size'] == 'extralarge' } %>
+          <% if image %>
           <li>
-            <%= link_to "Share on Facebook!", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%202013%20#{url_for(:only_path => false)}",
+          <%= link_to "Share on Facebook!", "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=#{url_for(:only_path => false)}&p[images][0]=#{image['#text']}&p[title]=#{page_title}&p[summary]=#{meta_description}",
               :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Facebook');"
             %>
           </li>
+          <% end %>
         <% end %>
       </ul>
     </div>
