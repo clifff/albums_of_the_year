@@ -15,7 +15,6 @@ end
 gem 'jquery-rails'
 gem 'anjlab-bootstrap-rails', '>= 2.2', :require => 'bootstrap-rails'
 gem 'faraday'
-gem 'debugger'
 gem 'redis'
 gem 'foreman'
 gem 'nokogiri'
