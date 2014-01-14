@@ -92,6 +92,7 @@ Vagrant::Config.run do |config|
   # Setup virtual machine box. This VM configuration code is always executed.
   config.vm.box = BOX_NAME
   config.vm.box_url = BOX_URI
+    config.vm.forward_port 3000, 3000
 
   # Use the specified private key path if it is specified and not empty.
   if SSH_PRIVKEY_PATH
@@ -99,6 +100,7 @@ Vagrant::Config.run do |config|
   end
 
   config.ssh.forward_agent = true
+
 end
 
 # Providers were added on Vagrant >= 1.1.0
