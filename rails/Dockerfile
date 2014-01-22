@@ -6,10 +6,11 @@ RUN apt-get -y install python-software-properties
 RUN apt-add-repository -y ppa:brightbox/ruby-ng-experimental
 # for supervisord?
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
+
 RUN apt-get -y update
 RUN apt-get -y upgrade
-RUN apt-get -y install ruby1.9.3
-RUN apt-get -y install build-essential git-core redis-server wget zlib1g-dev libssl-dev libxslt-dev libxml2-dev nodejs
+
+RUN apt-get -y install build-essential git-core redis-server wget zlib1g-dev libssl-dev libxslt-dev libxml2-dev nodejs ruby1.9.3 supervisor
  
 # install supervisord
 RUN apt-get install -y supervisor
