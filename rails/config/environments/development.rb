@@ -29,5 +29,5 @@ AlbumsOfTheYear::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  Rails.logger = Logger.new(STDOUT)
+  config.logger = Logger.new(STDOUT)
 end
