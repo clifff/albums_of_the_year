@@ -1,6 +1,7 @@
 # Dockerfile - Rails container
 
 FROM ubuntu
+MAINTAINER Clif Reeder clifreeder@gmail.com
 
 RUN apt-get -y install python-software-properties
 RUN apt-add-repository -y ppa:brightbox/ruby-ng-experimental
