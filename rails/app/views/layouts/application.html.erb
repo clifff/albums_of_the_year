@@ -33,13 +33,15 @@
               :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Tweet');"
             %>
           </li>
-          <% image = @albums[0]['image'].detect{|i| i['size'] == 'extralarge' } %>
-          <% if image %>
-          <li>
-          <%= link_to "Share on Facebook!", "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=#{url_for(:only_path => false)}&p[images][0]=#{image['#text']}&p[title]=#{page_title}&p[summary]=#{meta_description}",
-              :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Facebook');"
-            %>
-          </li>
+          <% if @albums.present? %>
+            <% image = @albums[0]['image'].detect{|i| i['size'] == 'extralarge' } %>
+            <% if image %>
+            <li>
+            <%= link_to "Share on Facebook!", "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=#{url_for(:only_path => false)}&p[images][0]=#{image['#text']}&p[title]=#{page_title}&p[summary]=#{meta_description}",
+                :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Facebook');"
+              %>
+            </li>
+            <% end %>
           <% end %>
         <% end %>
       </ul>

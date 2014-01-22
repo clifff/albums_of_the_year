@@ -11,18 +11,16 @@ RUN apt-get -y update
 RUN apt-get -y upgrade
 
 RUN apt-get -y install build-essential git-core redis-server wget zlib1g-dev libssl-dev libxslt-dev libxml2-dev nodejs ruby1.9.3 supervisor
- 
-# install supervisord
-RUN apt-get install -y supervisor
-RUN mkdir -p /var/log/supervisor
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 RUN gem install bundler
 
-WORKDIR /tmp 
+WORKDIR /tmp
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
-RUN bundle install 
+RUN bundle install
+
+# setup supervisord
+RUN mkdir -p /var/log/supervisor
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy the app into the image.
 ADD . /opt/albums_of_the_year
