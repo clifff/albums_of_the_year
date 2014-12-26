@@ -5,7 +5,7 @@
   <meta property="og:title" content="<%= page_title %>">
   <meta name="description" content="<%= meta_description %>" />
   <meta property="og:description" content="<%= meta_description %>" />
-  <meta property="og:site_name" content="Albums of 2013"/>
+  <meta property="og:site_name" content="Albums of <%= YEAR %>"/>
   <meta property="og:url" content="<%= url_for(:only_path => false ) %>"/>
   <% if @albums.present? %>
     <% image = @albums[0]['image'].detect{|i| i['size'] == 'extralarge' } %>
@@ -14,22 +14,21 @@
     <% end %>
   <% end %>
   <%= render 'layouts/twitter_card' %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <div class='container-fluid'>
-    <div class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" href="#"><%= page_title %></a>
-      <ul class="nav">
+    <div class="navbar navbar-default">
+      <a class="navbar-brand" href="#"><%= page_title %></a>
+      <ul class="nav navbar-nav">
         <li><%= nav_link "Home", root_url %></li>
         <li><%= nav_link "About", about_url %></li>
         <% if params[:action] == "lastfm_bestof" %>
           <li class="divider"></li>
           <li>
-            <%= link_to "Tweet your list!", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%202013:%20#{url_for(:only_path => false)}",
+            <%= link_to "Tweet your list!", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%20#{YEAR}:%20#{url_for(:only_path => false)}",
               :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Tweet');"
             %>
           </li>
@@ -43,7 +42,6 @@
           <% end %>
         <% end %>
       </ul>
-    </div>
   </div>
   <%= yield %>
   </div>
@@ -53,7 +51,7 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-20459966-1', 'albumsof2013.com');
+    ga('create', 'UA-20459966-1', 'albumsof2014.com');
     ga('send', 'pageview');
   </script>
   <%= javascript_include_tag "application" %>

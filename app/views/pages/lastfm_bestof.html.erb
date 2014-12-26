@@ -1,5 +1,5 @@
 <% @albums.each_slice(4) do |album_chunk| %>
-  <div class="row-fluid">
+  <div class="row">
     <%= render :partial => 'album', :collection => album_chunk %>
   </div>
 <% end %>

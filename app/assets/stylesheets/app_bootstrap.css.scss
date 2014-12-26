@@ -1,15 +1,11 @@
-$gridColumns: 16;
-$gridColumnWidth: 80px;
+$grid-columns: 16;
 
-$gridGutterWidth: 0px;
-$gridGutterWidth1200: 0px;
-$gridGutterWidth768: 0px;
+$grid-gutter-width: 0px;
 
-$linkColor: #33BBFF;
-$linkColorHover: #0088cc;
+$link-color: #33BBFF;
+$link-color-hover: #0088cc;
 
-@import "twitter/bootstrap";
-@import "twitter/bootstrap-responsive";
+@import "bootstrap";
 
 a {
   text-decoration: none;
@@ -40,7 +36,6 @@ a {
 
 div.albumart {
   background-size: 100%;
-  height: $gridColumnWidth1200 * 4;
 
   .inside {
     display:none;
@@ -57,7 +52,7 @@ div.albumart {
 
 div.inside {
   height: 100%;
-  width: 100;
+  width: 120;
   h3 {
     margin: 0 0 0 0;
     padding: 8px 0 0 8px;

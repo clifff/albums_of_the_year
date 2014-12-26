@@ -10,7 +10,7 @@ class LastFmUser
       if top_albums
         top_albums.each do |mbid|
           album = LastFmApi.get_album(:mbid => mbid)
-          #next if album['releasedate'] != 2013
+          next if album['releasedate'] != YEAR
           albums << album
         end
       end

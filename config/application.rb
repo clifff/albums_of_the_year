@@ -67,3 +67,5 @@ module AlbumsOfTheYear
     config.assets.version = '1.0'
   end
 end
+
+YEAR = 2014

@@ -1,6 +1,6 @@
 module ApplicationHelper
   def page_title
-    title = "Albums of 2013"
+    title = "Albums of #{YEAR}"
     if @username
       "#{@username}'s #{title}"
     else
@@ -36,9 +36,9 @@ module ApplicationHelper
 
   def meta_description
     if @username
-      "#{@username}'s most listened to albums from 2013"
+      "#{@username}'s most listened to albums from #{YEAR}"
     else
-      "Use your Last.fm account to find out what new music you listened to the most in 2013"
+      "Use your Last.fm account to find out what new music you listened to the most in #{YEAR}"
     end
   end
 end

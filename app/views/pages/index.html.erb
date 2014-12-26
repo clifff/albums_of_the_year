@@ -1,14 +1,14 @@
-<div class="row-fluid visible-desktop hidden-tablet hidden-phone">
+<div class="row visible-desktop hidden-tablet hidden-phone">
   <%= render :partial => 'album', :collection => @albums %>
 </div>
-<div class="row-fluid">
-  <span class='span2'></span>
-  <span class='span12'>
+<div class="row">
+  <span class='col-md-2'></span>
+  <span class='col-md-12'>
     <p></p>
     <form class='form-inline' onSubmit='submitUsername(); return false' >
       <fieldset>
         <legend>
-          Want to find out what albums you listened to the most in 2013? Just type in your <%= link_to "Last.fm", "http://www.last.fm/" %>
+          Want to find out what albums you listened to the most in <%= YEAR %>? Just type in your <%= link_to "Last.fm", "http://www.last.fm/" %>
           username and we'll figure it out for you.
         </legend>
         <input type="text" placeholder="last.fm username" name='username' required id='username_field'>
@@ -16,10 +16,10 @@
       </fieldset>
     </form>
   </span>
-  <span class='span2'></span>
+  <span class='col-md-2'></span>
 </div>
-<div class="row-fluid">
-  <span class='span2'></span>
-  <span class="help-block"><%= link_to "Curious or impatient? Check out an example.", lastfm_bestof_url(:username => 'clifff') %></span>
-  <span class='span2'></span>
+<div class="row">
+  <span class='col-md-2'></span>
+  <span class="help-block col-md-12"><%= link_to "Curious or impatient? Check out an example.", lastfm_bestof_url(:username => 'clifff') %></span>
+  <span class='col-md-2'></span>
 </div>

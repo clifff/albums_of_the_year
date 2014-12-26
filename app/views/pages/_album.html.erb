@@ -3,7 +3,7 @@
 <% else %>
   <% image = {'#text' => ''} %>
 <% end%>
-<div style='background-image:url(<%= image['#text'] %>)' class='span4 albumart'>
+<div style='background-image:url(<%= image['#text'] %>)' class='col-md-4 albumart'>
   <%# do this so facebook picks up on the album art %>
   <img src='<%= image['#text'] %>' class='hidden' alt=''/>
   <div class='inside'>
