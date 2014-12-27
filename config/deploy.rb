@@ -34,7 +34,7 @@ namespace :deploy do
     sudo "sh -c 'cd #{release_path} && fig -f #{fig_fiel} stop'"
   end
   task :restart, :roles => :web, :except => { :no_release => true } do
-    build
-    sudo "sh -c 'cd #{release_path} && fig -f #{fig_file} restart'"
+    stop
+    start
   end
 end

@@ -18,7 +18,7 @@ redis:
     - "6379"
 web:
   build: .
-  command: bundle exec foreman start -f ./Procfile.production
+  command: touch log/production.log && bundle exec foreman start -f ./Procfile.production
   volumes:
     - .:/aoty
   ports:
