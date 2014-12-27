@@ -19,31 +19,35 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class='container-fluid'>
     <div class="navbar navbar-default">
-      <a class="navbar-brand" href="#"><%= page_title %></a>
-      <ul class="nav navbar-nav">
-        <li><%= nav_link "Home", root_url %></li>
-        <li><%= nav_link "About", about_url %></li>
-        <% if params[:action] == "lastfm_bestof" && @albums.present? %>
-          <li class="divider"></li>
-          <li>
-            <%= link_to "Tweet your list!", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%20#{YEAR}:%20#{url_for(:only_path => false)}",
-              :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Tweet');"
-            %>
-          </li>
-          <% image = @albums[0]['image'].detect{|i| i['size'] == 'extralarge' } %>
-          <% if image %>
-          <li>
-          <%= link_to "Share on Facebook!", "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=#{url_for(:only_path => false)}&p[images][0]=#{image['#text']}&p[title]=#{page_title}&p[summary]=#{meta_description}",
-              :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Facebook');"
-            %>
-          </li>
+      <div class='container-fluid'>
+        <div class='navbar-header'>
+          <a class="navbar-brand" href="#"><%= page_title %></a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><%= nav_link "Home", root_url %></li>
+          <li><%= nav_link "About", about_url %></li>
+          <% if params[:action] == "lastfm_bestof" && @albums.present? %>
+            <li class="divider"></li>
+            <li>
+              <%= link_to "Tweet your list!", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%20#{YEAR}:%20#{url_for(:only_path => false)}",
+                :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Tweet');"
+              %>
+            </li>
+            <% image = @albums[0]['image'].detect{|i| i['size'] == 'extralarge' } %>
+            <% if image %>
+            <li>
+            <%= link_to "Share on Facebook!", "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=#{url_for(:only_path => false)}&p[images][0]=#{image['#text']}&p[title]=#{page_title}&p[summary]=#{meta_description}",
+                :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Facebook');"
+              %>
+            </li>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
-  </div>
-  <%= yield %>
+        </ul>
+      </div>
+    </div>
+  <div class='container-fluid'>
+    <%= yield %>
   </div>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
