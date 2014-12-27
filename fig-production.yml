@@ -6,7 +6,7 @@ web:
   build: /home/albums/current
   command: bundle exec foreman start -f Procfile.production
   volumes:
-    - /homes/album/current:/aoty
+    - /homes/albums/current:/aoty
   ports:
     - "3000:3000"
   links:
