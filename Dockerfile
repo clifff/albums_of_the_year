@@ -4,4 +4,5 @@ RUN mkdir /aoty
 WORKDIR /aoty
 ADD Gemfile /aoty/Gemfile
 RUN bundle install
+RUN if [ $RAILS_ENV == 'production' ]; then bundle exec rake assets:precompile; else exit 0; fi
 ADD . /aoty
