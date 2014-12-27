@@ -1,2 +1,2 @@
-rails: bundle exec rake assets:precompile && unicorn_rails -E production -c config/unicorn.rb
+rails:  bundle exec unicorn_rails -E production -c config/unicorn.rb
 resque: bundle exec rake resque:workers

@@ -25,13 +25,14 @@ after "deploy:restart", "deploy:cleanup"
 namespace :deploy do
   task :build, :roles => :web, :except => { :no_release => true } do
     sudo "sh -c 'cd #{release_path} && fig -f #{fig_file} build'"
+    sudo "sh -c 'cd #{release_path} && fig -f #{fig_file} run web bundle exec rake assets:precompile RAILS_ENV=production'"
   end
   task :start, :roles => :web, :except => { :no_release => true } do
     build
     sudo "sh -c 'cd #{release_path} && fig -f #{fig_file} up -d'"
   end
   task :stop, :roles => :web, :except => { :no_release => true } do
-    sudo "sh -c 'cd #{release_path} && fig -f #{fig_fiel} stop'"
+    sudo "sh -c 'cd #{release_path} && fig -f #{fig_file} stop'"
   end
   task :restart, :roles => :web, :except => { :no_release => true } do
     stop
