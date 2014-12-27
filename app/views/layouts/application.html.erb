@@ -25,7 +25,7 @@
       <ul class="nav navbar-nav">
         <li><%= nav_link "Home", root_url %></li>
         <li><%= nav_link "About", about_url %></li>
-        <% if params[:action] == "lastfm_bestof" %>
+        <% if params[:action] == "lastfm_bestof" && @albums.present? %>
           <li class="divider"></li>
           <li>
             <%= link_to "Tweet your list!", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%20#{YEAR}:%20#{url_for(:only_path => false)}",
