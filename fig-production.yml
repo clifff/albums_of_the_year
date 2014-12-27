@@ -3,7 +3,7 @@ redis:
   ports:
     - "6379"
 web:
-  build: /home/aoty
+  build: /home/albums/current
   command: bundle exec foreman start -f Procfile.production
   volumes:
     - .:/aoty
