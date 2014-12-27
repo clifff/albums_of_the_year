@@ -8,6 +8,7 @@ set :scm, :git
 role :web, "104.236.51.131"
 set :user, "albums"
 set :deploy_to, "/home/albums"
+set :branch, `git branch  | awk '$1 ~ /\\*/ {print $2}'`.strip
 
 # TODO: not this
 set :use_sudo, false
@@ -16,23 +17,24 @@ default_run_options[:pty] = true
 set :deploy_via, :remote_cache
 
 set :rails_env, 'production'
+set :fig_file, "#{release_path}/fig-production.yml"
 
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
   task :build, :roles => :web, :except => { :no_release => true } do
-    run "cd #{current_path} && fig build -f fig-production.yml"
+    sudo "sh -c 'cd #{release_path} && fig -f #{fig_file} build'"
   end
   task :start, :roles => :web, :except => { :no_release => true } do
     build
-    run "cd #{current_path} && fig up -d -f fig-production.yml"
+    run "fig -f #{fig_file} up -d"
   end
   task :stop, :roles => :web, :except => { :no_release => true } do
-    run "cd #{current_path} && fig stop -f fig-production.yml"
+    run "fig -f #{fig_fiel} stop"
   end
   task :restart, :roles => :web, :except => { :no_release => true } do
     build
-    run "cd #{current_path} && fig restart -f fig-production.yml"
+    run "fig -f #{fig_file} restart"
   end
 end
