@@ -28,13 +28,13 @@ namespace :deploy do
   end
   task :start, :roles => :web, :except => { :no_release => true } do
     build
-    run "fig -f #{fig_file} up -d"
+    sudo "sh -c 'cd #{release_path} && fig -f #{fig_file} up -d'"
   end
   task :stop, :roles => :web, :except => { :no_release => true } do
-    run "fig -f #{fig_fiel} stop"
+    sudo "sh -c 'cd #{release_path} && fig -f #{fig_fiel} stop'"
   end
   task :restart, :roles => :web, :except => { :no_release => true } do
     build
-    run "fig -f #{fig_file} restart"
+    sudo "sh -c 'cd #{release_path} && fig -f #{fig_file} restart'"
   end
 end
