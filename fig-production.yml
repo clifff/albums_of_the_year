@@ -1,0 +1,15 @@
+redis:
+  image: redis
+  ports:
+    - "6379"
+web:
+  build: .
+  command: bundle exec foreman start -f ./Procfile.production
+  volumes:
+    - .:/aoty
+  ports:
+    - "3000:3000"
+  links:
+    - redis
+  environment:
+    RAILS_ENV: production

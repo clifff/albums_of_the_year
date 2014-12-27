@@ -21,13 +21,18 @@ set :rails_env, 'production'
 after "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
+  task :build, :roles => :web, :except => { :no_release => true } do
+    run "cd #{current_path} && fig build -f fig-production.yml"
+  end
   task :start, :roles => :web, :except => { :no_release => true } do
+    build
     run "cd #{current_path} && fig up -d -f fig-production.yml"
   end
   task :stop, :roles => :web, :except => { :no_release => true } do
     run "cd #{current_path} && fig stop -f fig-production.yml"
   end
   task :restart, :roles => :web, :except => { :no_release => true } do
+    build
     run "cd #{current_path} && fig restart -f fig-production.yml"
   end
 end
