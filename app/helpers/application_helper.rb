@@ -44,7 +44,7 @@ module ApplicationHelper
 
   def proxied_lastfm_image(url)
     uri = URI.parse(url)
-    url_for :controller => :images, :action => :lastfm, :cdn_path => uri.path
+    url_for :controller => :images, :action => :lastfm, :cdn_path => uri.path, :only_path => false
   end
 
 end
