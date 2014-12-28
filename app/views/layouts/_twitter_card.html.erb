@@ -9,6 +9,6 @@
   <% @albums.first(4).each_with_index do |album, i| %>
     <% next unless album['image'].present? %>
     <% image = album['image'].detect{|i| i['size'] == 'extralarge'} %>
-    <meta name="twitter:image<%= i %>" content="<%= image['#text'] %>">
+    <meta name="twitter:image<%= i %>" content="<%= proxied_lastfm_image(image['#text']) %>">
   <% end %>
 <% end %>

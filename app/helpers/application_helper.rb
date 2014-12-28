@@ -41,4 +41,10 @@ module ApplicationHelper
       "Use your Last.fm account to find out what new music you listened to the most in #{YEAR}"
     end
   end
+
+  def proxied_lastfm_image(url)
+    uri = URI.parse(url)
+    url_for :controller => :images, :action => :lastfm, :cdn_path => uri.path
+  end
+
 end
