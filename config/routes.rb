@@ -15,6 +15,8 @@ AlbumsOfTheYear::Application.routes.draw do
   match '/about' => "pages#about", :as => :about
   match '/lastfm/:username/waiting' => "pages#lastfm_waiting", :as => :lastfm_waiting
 
+  get '/images/lastfm/:cdn_path' => "images#lastfm", constraints: { cdn_path: /.*/ }
+
   mount Resque::Server.new, :at => "/resque"
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
