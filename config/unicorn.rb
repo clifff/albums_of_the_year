@@ -19,6 +19,8 @@ if GC.respond_to?(:copy_on_write_friendly=)
   GC.copy_on_write_friendly = true
 end
 
+pid("/tmp/pids")
+
 
 before_fork do |server, worker|
   ##
@@ -32,7 +34,7 @@ before_fork do |server, worker|
   #
   # Using this method we get 0 downtime deploys.
 
-  old_pid = File.join(File.dirname(__FILE__), '../tmp/pids/unicorn.pid.oldbin')
+  old_pid = File.join('/tmp/pids/unicorn.pid.oldbin')
   if File.exists?(old_pid) && server.pid != old_pid
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)
