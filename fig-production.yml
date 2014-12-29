@@ -1,5 +1,8 @@
 redis:
   image: redis
+  command: redis-server --appendonly yes
+  volumes:
+    - /var/albums_redis_data:/data
   ports:
     - "6379"
 web:
