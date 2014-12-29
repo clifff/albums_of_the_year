@@ -25,10 +25,10 @@ class PagesController < ApplicationController
 
   def index
     @albums = [
-      LastFmApi.get_album(mbid: "cf32c417-73c5-40be-a12d-cde9eb33122b"), # San Fermin
-      LastFmApi.get_album(mbid: "4a5a2821-8050-49a1-8a0b-b7f8db6528a4"), # Danny Brown
-      LastFmApi.get_album(mbid: "694a93c5-835e-470e-a0d8-e42093eed9af"), # Janelle Monet
-      LastFmApi.get_album(mbid: "ebc6e131-2301-480c-ad3f-4e0b790dcf05") # Autre Ne Veut
+      LastFmApi.get_album(mbid: "a50f9ba3-5891-4f22-b5da-edf84cc04b0c"),  # FKA Twigs
+      LastFmApi.get_album(mbid: "1e72ba35-fe16-4de8-8a1c-029a4859d114"),  # Caribou - Our Love
+      LastFmApi.get_album(mbid: "063f311e-9c81-4616-a007-b76e3df910c9"),  # Run The Jewels 2
+      LastFmApi.get_album(mbid: "9ad70837-cea0-4f76-ab3b-75479a2823f6")   # Ty Segall
     ]
   end
 end
