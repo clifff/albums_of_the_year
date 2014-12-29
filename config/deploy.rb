@@ -4,8 +4,11 @@ set :application, "albums"
 set :repository,  "git://github.com/clifff/albums_of_the_year.git"
 set :scm, :git
 
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+# PROBLEM: If we use the normal shared directories (tmp/pids, log, public/system)
+# than we run into permission/existence problems when the container looks in these places,
+# because it has symlinks pointing to things that didn't get mounted. So instead,
+# share nothing between containers
+set :shared_children, []
 
 role :web, "104.236.51.131"
 set :user, "albums"
