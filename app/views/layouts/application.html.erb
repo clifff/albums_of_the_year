@@ -30,7 +30,7 @@
           <% if params[:action] == "lastfm_bestof" && @albums.present? %>
             <li class="divider"></li>
             <li>
-              <%= link_to "Tweet your list!", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%20#{YEAR}:%20#{url_for(:only_path => false)}",
+              <%= link_to "Tweet your list!", "http://twitter.com/share?text=My%20most%20listened%20to%20albums%20of%20#{YEAR}:",
                 :target => "_blank", :onClick => "trackOutboundLink(this, 'Outbound Links', 'Tweet');"
               %>
             </li>
