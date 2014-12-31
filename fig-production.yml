@@ -1,8 +1,9 @@
 redis:
   image: redis
-  command: redis-server --appendonly yes
+  command: redis-server /usr/local/etc/redis/redis.conf
   volumes:
     - /var/albums_redis_data:/data
+    - /home/albums/current/config/redis-production.conf:/usr/local/etc/redis/redis.conf
   ports:
     - "6379"
 web:
