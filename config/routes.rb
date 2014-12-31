@@ -1,4 +1,5 @@
 require 'resque/server'
+require "resque_web"
 
 AlbumsOfTheYear::Application.routes.draw do
   # The priority is based upon order of creation:
@@ -17,7 +18,7 @@ AlbumsOfTheYear::Application.routes.draw do
 
   get '/images/lastfm/:cdn_path' => "images#lastfm", constraints: { cdn_path: /.*/ }
 
-  mount Resque::Server.new, :at => "/resque"
+  mount ResqueWeb::Engine => "/resque_web"
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

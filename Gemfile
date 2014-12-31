@@ -17,6 +17,7 @@ gem 'redis'
 gem 'foreman'
 gem 'nokogiri'
 gem 'resque'
+gem 'resque-web', require: 'resque_web'
 
 group :development do
   gem 'capistrano', "~> 2.15.5"
