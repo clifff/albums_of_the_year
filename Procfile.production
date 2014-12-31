@@ -1,2 +1,2 @@
 rails:  bundle exec unicorn_rails -E production -c config/unicorn.rb
-resque: bundle exec rake resque:workers
+resque: INTERVAL=0.1 COUNT=5 bundle exec rake resque:workers
