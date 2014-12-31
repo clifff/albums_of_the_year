@@ -103,7 +103,7 @@ class LastFmApi
     if result.nil?
       result = yield
       $redis.set(key, result)
-      $redis.ttl(key, 1.week)
+      $redis.expire(key, 1.week)
     end
     Rails.logger.info result.inspect
     result
